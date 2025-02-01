@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Board</title>
+    <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+    <h1>💼 Job Board</h1>
+    <a href="/post">➕ Post a Job</a>
+    <div class="jobs">
+        <% jobs.forEach(job => { %>
+            <div class="job">
+                <h2><a href="/job/<%= job._id %>"><%= job.title %></a></h2>
+                <p><strong>Company:</strong> <%= job.company %></p>
+                <p><strong>Location:</strong> <%= job.location %></p>
+                <p><strong>Salary:</strong> <%= job.salary %></p>
+            </div>
+        <% }); %>
+    </div>
+</body>
+</html>
