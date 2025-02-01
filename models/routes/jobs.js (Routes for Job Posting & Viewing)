@@ -1,0 +1,31 @@
+const express = require("express");
+const Job = require("../models/Job");
+
+const router = express.Router();
+
+// Show All Jobs
+router.get("/", async (req, res) => {
+    const jobs = await Job.find();
+    res.render("index", { jobs });
+});
+
+// Add Job Page
+router.get("/post", (req, res) => {
+    res.render("postJob");
+});
+
+// Handle Job Posting
+router.post("/post", async (req, res) => {
+    const { title, company, location, description, salary } = req.body;
+    const newJob = new Job({ title, company, location, description, salary });
+    await newJob.save();
+    res.redirect("/");
+});
+
+// View Job Details
+router.get("/job/:id", async (req, res) => {
+    const job = await Job.findById(req.params.id);
+    res.render("jobDetails", { job });
+});
+
+module.exports = router;
